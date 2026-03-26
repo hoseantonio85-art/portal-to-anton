@@ -113,10 +113,11 @@ const BentoCard = ({ card }: { card: CardData }) => {
 };
 
 const BentoGrid = () => {
+  const sortedCards = getSortedCards(cards);
   return (
     <div className="ml-[40%] min-h-screen p-6 xl:p-10 max-lg:ml-0">
       <div className="grid grid-cols-4 gap-4 auto-rows-[120px]">
-        {cards.map((card) => (
+        {sortedCards.map((card) => (
           <BentoCard key={card.id} card={card} />
         ))}
       </div>
