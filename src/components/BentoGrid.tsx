@@ -1,4 +1,5 @@
-import { cards, type CardData } from "@/data/cards";
+import { cards, getSortedCards, type CardData } from "@/data/cards";
+import { useNavigate } from "react-router-dom";
 import { cn } from "@/lib/utils";
 
 const CardIcon = ({ icon }: { icon: string }) => {
