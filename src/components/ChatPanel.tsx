@@ -1,6 +1,6 @@
 import { useState, useCallback, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
-import { chatScenarios, type ChatMessage } from "@/data/chat";
+import { chatScenarios, IDLE_HINTS, type ChatMessage } from "@/data/chat";
 import { cn } from "@/lib/utils";
 
 type Phase = "idle" | "exiting" | "waiting" | "entering" | "visible";
@@ -12,10 +12,6 @@ const FADE_OUT_MS = 260;
 const BEAT_AFTER_EXIT = 180;
 const BUTTON_FADE_IN = 320;
 
-const IDLE_HINTS = [
-  "Можешь просто покликать карточки, это тоже план ✌️",
-  "Я, кстати, не обижусь, если ты сначала всё исследуешь",
-];
 
 const ChatBubble = ({
   message,
