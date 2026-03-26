@@ -12,10 +12,6 @@ const FADE_OUT_MS = 260;
 const BEAT_AFTER_EXIT = 180;
 const BUTTON_FADE_IN = 320;
 
-const IDLE_HINTS = [
-  "Можешь просто покликать карточки, это тоже план ✌️",
-  "Я, кстати, не обижусь, если ты сначала всё исследуешь",
-];
 
 const ChatBubble = ({
   message,
