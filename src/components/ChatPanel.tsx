@@ -1,6 +1,6 @@
 import { useState, useCallback, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
-import { chatScenarios, type ChatMessage } from "@/data/chat";
+import { chatScenarios, IDLE_HINTS, type ChatMessage } from "@/data/chat";
 import { cn } from "@/lib/utils";
 
 type Phase = "idle" | "exiting" | "waiting" | "entering" | "visible";
