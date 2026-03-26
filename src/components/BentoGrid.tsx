@@ -1,4 +1,5 @@
-import { cards, type CardData } from "@/data/cards";
+import { cards, getSortedCards, type CardData } from "@/data/cards";
+import { useNavigate } from "react-router-dom";
 import { cn } from "@/lib/utils";
 
 const CardIcon = ({ icon }: { icon: string }) => {
@@ -63,8 +64,13 @@ const getCardStyle = (card: CardData) => {
 const isLightTheme = (card: CardData) => card.theme === "light";
 
 const BentoCard = ({ card }: { card: CardData }) => {
+  const navigate = useNavigate();
   const handleClick = () => {
-    if (card.link) {
+    if (card.type === "project" && card.slug) {
+      navigate(`/project/${card.slug}`);
+    } else if (card.type === "internal_page" && card.slug) {
+      navigate(`/post/${card.slug}`);
+    } else if (card.link) {
       if (card.type === "external_link") {
         window.open(card.link, "_blank", "noopener");
       } else {
@@ -107,10 +113,11 @@ const BentoCard = ({ card }: { card: CardData }) => {
 };
 
 const BentoGrid = () => {
+  const sortedCards = getSortedCards(cards);
   return (
     <div className="ml-[40%] min-h-screen p-6 xl:p-10 max-lg:ml-0">
       <div className="grid grid-cols-4 gap-4 auto-rows-[120px]">
-        {cards.map((card) => (
+        {sortedCards.map((card) => (
           <BentoCard key={card.id} card={card} />
         ))}
       </div>

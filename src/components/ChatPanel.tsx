@@ -1,6 +1,6 @@
 import { useState, useCallback } from "react";
 import { Button } from "@/components/ui/button";
-import { chatScenarios, type ChatMessage } from "@/data/cards";
+import { chatScenarios, type ChatMessage } from "@/data/chat";
 import { cn } from "@/lib/utils";
 
 const ChatBubble = ({ message, index }: { message: ChatMessage; index: number }) => (
