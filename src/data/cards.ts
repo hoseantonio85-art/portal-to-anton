@@ -11,6 +11,10 @@ export interface CardData {
   bgColor?: string;
   colSpan?: number;
   rowSpan?: number;
+  order?: number | null;
+  publishedAt: string;
+  published: boolean;
+  slug?: string;
 }
 
 export const cards: CardData[] = [
@@ -26,6 +30,9 @@ export const cards: CardData[] = [
     theme: "dark",
     colSpan: 2,
     rowSpan: 2,
+    order: 1,
+    publishedAt: "2024-01-01",
+    published: true,
   },
   {
     id: "twitch",
@@ -39,6 +46,9 @@ export const cards: CardData[] = [
     theme: "gradient-purple",
     colSpan: 2,
     rowSpan: 1,
+    order: 2,
+    publishedAt: "2024-01-02",
+    published: true,
   },
   {
     id: "instagram",
@@ -52,6 +62,9 @@ export const cards: CardData[] = [
     theme: "gradient-instagram",
     colSpan: 2,
     rowSpan: 1,
+    order: 3,
+    publishedAt: "2024-01-03",
+    published: true,
   },
   {
     id: "vk",
@@ -65,6 +78,9 @@ export const cards: CardData[] = [
     theme: "gradient-purple",
     colSpan: 1,
     rowSpan: 1,
+    order: 4,
+    publishedAt: "2024-01-04",
+    published: true,
   },
   {
     id: "telegram",
@@ -78,6 +94,9 @@ export const cards: CardData[] = [
     theme: "dark",
     colSpan: 1,
     rowSpan: 1,
+    order: 5,
+    publishedAt: "2024-01-05",
+    published: true,
   },
   {
     id: "figma",
@@ -91,6 +110,9 @@ export const cards: CardData[] = [
     theme: "dark",
     colSpan: 1,
     rowSpan: 1,
+    order: 6,
+    publishedAt: "2024-01-06",
+    published: true,
   },
   {
     id: "whatsapp",
@@ -104,34 +126,45 @@ export const cards: CardData[] = [
     theme: "gradient-green",
     colSpan: 1,
     rowSpan: 1,
+    order: 7,
+    publishedAt: "2024-01-07",
+    published: true,
   },
   {
     id: "hackathon",
     title: "Страница команды",
     description: "на хаккатоне Antro",
     type: "project",
-    link: "#",
+    link: null,
     image: null,
     icon: null,
     size: "large",
     theme: "custom",
-    bgColor: "linear-gradient(135deg, hsl(270,60%,30%), hsl(200,80%,40%))",
+    bgColor: "linear-gradient(135deg, hsl(270, 60%, 30%), hsl(200, 80%, 40%))",
     colSpan: 2,
     rowSpan: 1,
+    order: 8,
+    publishedAt: "2024-02-01",
+    published: true,
+    slug: "hackathon-antro",
   },
   {
     id: "synthwave",
     title: "SynthWave клип",
     description: "на нейронках",
     type: "project",
-    link: "#",
+    link: null,
     image: null,
     icon: null,
     size: "large",
     theme: "custom",
-    bgColor: "linear-gradient(135deg, hsl(280,60%,25%), hsl(200,90%,50%))",
+    bgColor: "linear-gradient(135deg, hsl(280, 60%, 25%), hsl(200, 90%, 50%))",
     colSpan: 2,
     rowSpan: 1,
+    order: 9,
+    publishedAt: "2024-02-15",
+    published: true,
+    slug: "synthwave-clip",
   },
   {
     id: "coroflot",
@@ -145,6 +178,9 @@ export const cards: CardData[] = [
     theme: "dark",
     colSpan: 2,
     rowSpan: 2,
+    order: 10,
+    publishedAt: "2024-03-01",
+    published: true,
   },
   {
     id: "hh",
@@ -159,68 +195,20 @@ export const cards: CardData[] = [
     bgColor: "hsl(0, 80%, 55%)",
     colSpan: 2,
     rowSpan: 1,
+    order: 11,
+    publishedAt: "2024-03-15",
+    published: true,
   },
 ];
 
-export interface ChatMessage {
-  id: string;
-  text: string;
-  from: "anton" | "user";
+/** Sort cards: by order first (nulls last), then by publishedAt descending */
+export function getSortedCards(data: CardData[]): CardData[] {
+  return data
+    .filter((c) => c.published)
+    .sort((a, b) => {
+      const aOrder = a.order ?? Infinity;
+      const bOrder = b.order ?? Infinity;
+      if (aOrder !== bOrder) return aOrder - bOrder;
+      return new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime();
+    });
 }
-
-export interface ChatScenario {
-  messages: ChatMessage[];
-  buttons: { label: string; nextScenario: string }[];
-}
-
-export const chatScenarios: Record<string, ChatScenario> = {
-  start: {
-    messages: [],
-    buttons: [
-      { label: "Зачем этот сайт?", nextScenario: "why" },
-      { label: "Давай про опыт", nextScenario: "experience" },
-    ],
-  },
-  why: {
-    messages: [
-      { id: "w1", text: "Я собираю на нём web-артефакты, связанные со мной и дорогие моей памяти", from: "anton" },
-      { id: "w2", text: "Это моя коллекция идей и всяких всячин", from: "anton" },
-      { id: "w3", text: "Справа можно покликать по карточкам — каждая ведёт куда-то интересное ✨", from: "anton" },
-    ],
-    buttons: [
-      { label: "Ясненько…", nextScenario: "understood" },
-      { label: "Давай про опыт", nextScenario: "experience" },
-    ],
-  },
-  experience: {
-    messages: [
-      { id: "e1", text: "Я занимаюсь UX/UI дизайном уже больше 5 лет", from: "anton" },
-      { id: "e2", text: "Работал с финтех-продуктами, мобильными приложениями и вебом", from: "anton" },
-      { id: "e3", text: "Люблю делать сложное — простым и красивым", from: "anton" },
-    ],
-    buttons: [
-      { label: "Круто!", nextScenario: "cool" },
-      { label: "Зачем этот сайт?", nextScenario: "why" },
-    ],
-  },
-  understood: {
-    messages: [
-      { id: "u1", text: "Ну вот и славно 😊", from: "anton" },
-      { id: "u2", text: "Листай карточки справа, там много интересного", from: "anton" },
-    ],
-    buttons: [
-      { label: "Давай про опыт", nextScenario: "experience" },
-      { label: "Начать сначала", nextScenario: "start" },
-    ],
-  },
-  cool: {
-    messages: [
-      { id: "c1", text: "Спасибо! 🙌", from: "anton" },
-      { id: "c2", text: "Если хочешь связаться — есть Telegram и WhatsApp в карточках справа", from: "anton" },
-    ],
-    buttons: [
-      { label: "Зачем этот сайт?", nextScenario: "why" },
-      { label: "Начать сначала", nextScenario: "start" },
-    ],
-  },
-};
