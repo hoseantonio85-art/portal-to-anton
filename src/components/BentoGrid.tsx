@@ -64,8 +64,13 @@ const getCardStyle = (card: CardData) => {
 const isLightTheme = (card: CardData) => card.theme === "light";
 
 const BentoCard = ({ card }: { card: CardData }) => {
+  const navigate = useNavigate();
   const handleClick = () => {
-    if (card.link) {
+    if (card.type === "project" && card.slug) {
+      navigate(`/project/${card.slug}`);
+    } else if (card.type === "internal_page" && card.slug) {
+      navigate(`/post/${card.slug}`);
+    } else if (card.link) {
       if (card.type === "external_link") {
         window.open(card.link, "_blank", "noopener");
       } else {
