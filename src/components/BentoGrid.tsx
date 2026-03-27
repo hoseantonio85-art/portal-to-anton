@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { cards, type CardData } from "@/data/cards";
+import { getCardsSync, type CardData } from "@/services/cardService";
 import { cn } from "@/lib/utils";
 
 /* ── Accent color map ── */
