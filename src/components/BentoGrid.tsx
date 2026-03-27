@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { cards, type CardData } from "@/data/cards";
+import { getCardsSync, type CardData } from "@/services/cardService";
 import { cn } from "@/lib/utils";
 
 /* ── Accent color map ── */
@@ -180,14 +180,18 @@ const BentoCard = ({ card }: { card: CardData }) => {
 
 /* ── Grid ── */
 
-const BentoGrid = () => (
-  <div className="ml-[40%] min-h-screen p-6 xl:p-10 max-lg:ml-0">
-    <div className="grid grid-cols-4 gap-4 auto-rows-[120px]">
-      {cards.map((card) => (
-        <BentoCard key={card.id} card={card} />
-      ))}
+const BentoGrid = () => {
+  const cards = getCardsSync();
+
+  return (
+    <div className="ml-[40%] min-h-screen p-6 xl:p-10 max-lg:ml-0">
+      <div className="grid grid-cols-4 gap-4 auto-rows-[120px]">
+        {cards.map((card) => (
+          <BentoCard key={card.id} card={card} />
+        ))}
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 export default BentoGrid;
