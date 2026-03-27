@@ -8,12 +8,15 @@ export interface CardData {
   size: "small" | "medium" | "large";
   theme: "dark" | "light" | "gradient" | "accent";
   textMode: "always" | "hover" | "none";
-  accent?: string;
+  order?: number;
+  publishedAt?: string;
+  published?: boolean;
   tags?: string[];
   ctaLabel?: string;
+  accent?: string;
 }
 
-export const cards: CardData[] = [
+const cards: CardData[] = [
   {
     id: "behance",
     title: "Моё портфолио",
@@ -24,6 +27,8 @@ export const cards: CardData[] = [
     size: "large",
     theme: "dark",
     textMode: "always",
+    order: 1,
+    published: true,
   },
   {
     id: "picture-filler",
@@ -35,6 +40,8 @@ export const cards: CardData[] = [
     size: "large",
     theme: "gradient",
     textMode: "always",
+    order: 2,
+    published: true,
   },
   {
     id: "coroflot",
@@ -47,6 +54,8 @@ export const cards: CardData[] = [
     theme: "dark",
     textMode: "always",
     accent: "lime",
+    order: 3,
+    published: true,
   },
   {
     id: "twitch",
@@ -58,6 +67,8 @@ export const cards: CardData[] = [
     size: "medium",
     theme: "gradient",
     textMode: "always",
+    order: 4,
+    published: true,
   },
   {
     id: "instagram",
@@ -69,6 +80,8 @@ export const cards: CardData[] = [
     size: "medium",
     theme: "gradient",
     textMode: "always",
+    order: 5,
+    published: true,
   },
   {
     id: "antro",
@@ -80,6 +93,8 @@ export const cards: CardData[] = [
     size: "medium",
     theme: "gradient",
     textMode: "always",
+    order: 6,
+    published: true,
   },
   {
     id: "synthwave",
@@ -91,6 +106,8 @@ export const cards: CardData[] = [
     size: "medium",
     theme: "gradient",
     textMode: "always",
+    order: 7,
+    published: true,
   },
   {
     id: "hh",
@@ -103,6 +120,8 @@ export const cards: CardData[] = [
     theme: "accent",
     textMode: "always",
     accent: "coral",
+    order: 8,
+    published: true,
   },
   {
     id: "vk",
@@ -114,6 +133,8 @@ export const cards: CardData[] = [
     size: "small",
     theme: "gradient",
     textMode: "none",
+    order: 9,
+    published: true,
   },
   {
     id: "telegram",
@@ -125,6 +146,8 @@ export const cards: CardData[] = [
     size: "small",
     theme: "dark",
     textMode: "hover",
+    order: 10,
+    published: true,
   },
   {
     id: "figma",
@@ -136,6 +159,8 @@ export const cards: CardData[] = [
     size: "small",
     theme: "dark",
     textMode: "hover",
+    order: 11,
+    published: true,
   },
   {
     id: "max",
@@ -147,5 +172,9 @@ export const cards: CardData[] = [
     size: "small",
     theme: "dark",
     textMode: "hover",
+    order: 12,
+    published: true,
   },
 ];
+
+export default cards;
